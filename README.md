@@ -1,6 +1,18 @@
 # Unocab
 
-Unocab is an UNO game engine. Usage is simple:
+Unocab is an UNO game engine.
+
+# Installation
+
+### Deno
+```typescript
+import { Game } from "https://deno.land/x/unocab@v0.8.0/mod.ts";
+```
+
+### Node
+`npm install unocab`
+
+# Usage
 
 ```typescript
 // On creation of a Game, an UNO deck of 108 cards is
