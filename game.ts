@@ -22,6 +22,7 @@ import {
   MIN_PLAYERS,
   XOR,
   cyrb128,
+  exhaustive,
   includes,
 } from "./utils.ts";
 
@@ -459,7 +460,7 @@ export class Game<Shorthand extends boolean = false> {
    * game.processNewEvent({ type: "draw", by: p1 });
    * ```
    */
-  processNewEvent(event: GameEvent): ProcessEventResult | undefined {
+  processNewEvent(event: GameEvent): ProcessEventResult {
     if (!playerId.safeParse(event.by).success) {
       throw new UnocabError(
         UECode.InvalidId,
@@ -720,7 +721,9 @@ export class Game<Shorthand extends boolean = false> {
         to: event.color,
         formatted: `Color changed to ${event.color}`,
       };
-    }
+    } else exhaustive(event);
+
+    throw "unreachable";
   }
 
   // ─── Gameplay Functions ──────────────────────────────────────────────
@@ -1007,7 +1010,9 @@ export class Game<Shorthand extends boolean = false> {
    * possible in the current state, would be valid. Please note that this
    * does not mean actually playing that card is okay. It just denotes the
    * current "pile status", so to speak. To check if playing a card is valid
-   * in the current situation, use {@link Game.checkEvent}.
+   * in the current situation, use {@link Game.checkEvent}. Also, in case any
+   * of `expectedType` or `expectedColor` is undefined, it becomes a non
+   * condition. This means any type/color is allowed.
    */
   expectedCard(bluffSiteCheck = false): {
     expectedType?: Card["type"];

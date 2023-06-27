@@ -137,9 +137,9 @@ function playerTurn(game: Game, playerId: string, deck: Card[]) {
 
   // ─── User Is Drawing / Passing / Calling Bluff ───────────────────────
   if (answer == "draw")
-    return console.log(colors.cyan("!!"), game.draw(playerId), "\n");
+    return console.log(colors.cyan("!!"), game.draw(playerId)!.formatted, "\n");
   if (answer == "pass")
-    return console.log(colors.cyan("!!"), game.pass(playerId), "\n");
+    return console.log(colors.cyan("!!"), game.pass(playerId)!.formatted, "\n");
 
   if (answer == "call-bluff")
     return console.log(colors.cyan("!!"), game.callBluff(playerId), "\n");
@@ -165,7 +165,7 @@ function aiTurn(
   ) {
     const action = randomFrom(["draw", "callBluff"] as const);
     const status = game[action](aiId);
-    linedLog(`AI turn: ${action == "draw" ? "is " : ""}${status?.formatted}`);
+    linedLog(`AI turn: ${action == "draw" ? "is " : ""}${status.formatted}`);
     return;
   }
 
@@ -177,7 +177,7 @@ function aiTurn(
       game.play(aiId, plusTwoCard);
     } else {
       const status = game.draw(aiId);
-      linedLog(`AI is ${status?.formatted}`);
+      linedLog(`AI is ${status.formatted}`);
     }
 
     return;
@@ -244,7 +244,7 @@ function aiTurn(
     } else {
       // if the AI has no playable cards, draw a card
       const status = game.draw(aiId);
-      linedLog(`AI is ${status?.formatted}`);
+      linedLog(`AI is ${status.formatted}`);
       return aiTurn(game, aiId, game.handOf(aiId), true);
     }
   } else {

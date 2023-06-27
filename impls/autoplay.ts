@@ -97,7 +97,7 @@ function aiTurn(
     const action = randomFrom(["draw", "callBluff"] as const);
     const status = game[action](playerId);
     linedLog(
-      `${aiName} turn: ${action == "draw" ? "is " : ""}${status?.formatted}`,
+      `${aiName} turn: ${action == "draw" ? "is " : ""}${status.formatted}`,
       isAiOne
     );
     return;
@@ -114,7 +114,7 @@ function aiTurn(
       game.play(playerId, plusTwoCard);
     } else {
       const status = game.draw(playerId);
-      linedLog(`${aiName} is ${status?.formatted}`, isAiOne);
+      linedLog(`${aiName} is ${status.formatted}`, isAiOne);
     }
 
     return;
@@ -184,7 +184,7 @@ function aiTurn(
     } else {
       // if the AI has no playable cards, draw a card
       const status = game.draw(playerId);
-      linedLog(`${aiName} is ${status?.formatted}`, isAiOne);
+      linedLog(`${aiName} is ${status.formatted}`, isAiOne);
       return aiTurn(game, playerId, game.handOf(playerId), true);
     }
   } else {

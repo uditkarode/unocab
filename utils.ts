@@ -65,6 +65,8 @@ export function includes<T>(arr: T[], v: unknown): v is T {
   return arr.includes(v as T);
 }
 
+export function exhaustive(_: never) {}
+
 type Without<T, U> = { [P in Exclude<keyof T, keyof U>]?: never };
 // deno-lint-ignore ban-types
 export type XOR<T, U> = T | U extends object
