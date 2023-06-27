@@ -57,13 +57,13 @@ if (end) console.log(end.loser + " lost the game!");
 
 During creation of a `Game`, you can optionally pass in `shorthandMode: true`. In shorthand
 mode, the engine only keeps as much information about the game as is needed for it to
-function. Otherwise, and by default, all information about the game is kept in the events
+function. Otherwise, **and by default**, **all** information about the game is kept in the events
 array (`game.state.events`). This allows you to have a history of all the happenings in that
 particular game, and also allows you to jump to an arbitrary point in the game. For example,
 to undo a move, you could use `game.jumpToEventIndex(-2)`. This
 function is not usable in shorthand mode, and the events array will only keep 5 events at most.
 
-TLDR: Use shorthand mode if you don't want to use `jumpToEventIndex` or keep the entire game history.
+**TLDR**: Use shorthand mode if you don't want to use `jumpToEventIndex` or keep the entire game history.
 
 # Serialising and Deserialising
 
@@ -89,7 +89,7 @@ A game event is an object with a `type` that denotes what kind of event it is (e
 
 It looks like `{ type: "card_played", by: "player-one", card: { type: "six", color: "red" } }`.
 
-NOTE: In full mode (aka not shorthand mode), the events array will also contain events with type `game_info`. These events are not a result of player's actions, but are added by the engine to denote certain happenings. For example, when a player calls bluff, a `game_info` event will be added afterwards to signify whether the bluff call succeeded or failed. This can be helpful for something like implementation of animations when re-playing the game.
+> NOTE: In full mode (aka not shorthand mode), the events array will also contain events with type `game_info`. These events are not a result of player's actions, but are added by the engine to denote certain happenings. For example, when a player calls bluff, a `game_info` event will be added afterwards to signify whether the bluff call succeeded or failed. This can be helpful for something like implementation of animations when re-playing the game.
 
 For more information about what events exist, please glance over the `types.ts` file.
 
@@ -105,4 +105,4 @@ directly be used like `game.processNewEvent(event)`, which acts as an alternativ
 Please refer to `impls/cli-uno.ts` for a cli-based game with an AI.
 There's also `impls/autoplay.ts`, which is an AI vs AI game.
 
-The "AI" in this case is just a series of if conditions, ofcourse! :D
+(AI here naturally means if conditions, ofcourse!)
