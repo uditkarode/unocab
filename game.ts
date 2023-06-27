@@ -523,8 +523,8 @@ export class Game<Shorthand extends boolean = false> {
         this._state.index += this._state.cache.turnStep * turnStepMultiplier;
       }
 
-      // add 'player_won' event if the player's deck is now empty
       if (!this.handOf(event.by).length) {
+        // add 'player_won' event if the player's deck is now empty
         this.recordEvent({
           type: "game_info",
           info: {
@@ -563,6 +563,14 @@ export class Game<Shorthand extends boolean = false> {
           formatted: `Player ${event.by} won!`,
         };
       }
+
+      return {
+        type: "card_played",
+        card: event.card,
+        formatted: `Played a ${event.card.color ? `${event.card.color} ` : ""}${
+          event.card.type
+        }`,
+      };
     }
 
     // ─── Draw Event ──────────────────────────────────────────────

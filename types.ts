@@ -195,6 +195,11 @@ export type GameState = z.infer<typeof gameState>;
 // functions like `draw`, `pass`, `play`, `callBluff`, or `switchColor`.
 export type ProcessEventResult =
   | {
+      type: "card_played";
+      card: Card;
+      formatted: string;
+    }
+  | {
       type: "player_win_game_end";
       won: string;
       lost: string;
